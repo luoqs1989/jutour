@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DAYDAYTOUR · Seoul K-Beauty 6D5N</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16232b; --ink-soft:#4a5a63;
+  --jade:#22574c; --jade-tint:#e7efeb; --jade-line:#c3d5cd;
+  --vermilion:#b2402f; --paper:#ffffff; --mist:#f4f6f5;
+  --rule:#dde3e0; --gold:#a98a4b;
+  /* beauty */
+  --plum:#3c2733; --plum-soft:#7a5c68;
+  --rose:#b2707d; --rose-deep:#8e4f5e; --rose-tint:#fbeef0; --rose-line:#eccfd6;
+  --champagne:#c9a44c; --blush:#fdf7f6; --blush-2:#f7e9ea;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Nanum Myeongjo",Georgia,serif;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+img{display:block;width:100%;height:100%;object-fit:cover}
+button{font:inherit}
+
+/* ===== 전환 ===== */
+body.lang-ko .e{display:none}
+body.lang-en .k{display:none}
+body.view-tour   #view-beauty{display:none}
+body.view-beauty #view-tour{display:none}
+body.view-beauty{background:var(--blush)}
+body.mode-net .amt .sell, body.mode-sell .amt .net{display:none}
+body.view-beauty .switch.price{display:none}
+
+/* ===== top bar ===== */
+.bar{position:sticky;top:0;z-index:80;background:rgba(255,255,255,.95);
+  backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--rule)}
+body.view-beauty .bar{background:rgba(253,247,246,.95);border-bottom-color:var(--rose-line)}
+.bar-in{max-width:1080px;margin:0 auto;padding:11px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:18px;letter-spacing:.14em;color:var(--ink)}
+.logo span{color:var(--jade)}
+body.view-beauty .logo{color:var(--plum)}
+body.view-beauty .logo span{color:var(--rose)}
+.tabs{display:flex;gap:2px;background:var(--mist);padding:3px;border-radius:999px}
+body.view-beauty .tabs{background:var(--blush-2)}
+.tabs button{border:0;background:transparent;padding:7px 17px;border-radius:999px;
+  font-size:13.5px;font-weight:500;color:var(--ink-soft);cursor:pointer;transition:.15s}
+body.view-tour   .tabs button[data-view="tour"]{background:var(--jade);color:#fff}
+body.view-beauty .tabs button[data-view="beauty"]{background:var(--rose-deep);color:#fff}
+.tabs button:focus-visible{outline:2px solid var(--vermilion);outline-offset:2px}
+.spacer{flex:1}
+.ctrls{display:flex;gap:9px;flex-wrap:wrap}
+.switch{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden;font-size:12.5px;font-weight:500}
+.switch button{border:0;background:transparent;color:var(--ink);padding:6px 14px;cursor:pointer}
+.switch button:focus-visible{outline:2px solid var(--vermilion);outline-offset:-2px}
+body.lang-ko .switch.lang button[data-lang="ko"],
+body.lang-en .switch.lang button[data-lang="en"]{background:var(--ink);color:#fff}
+body.view-beauty .switch.lang{border-color:var(--plum)}
+body.view-beauty .switch.lang button{color:var(--plum)}
+body.view-beauty.lang-ko .switch.lang button[data-lang="ko"],
+body.view-beauty.lang-en .switch.lang button[data-lang="en"]{background:var(--plum);color:#fff}
+.switch.price{border-color:var(--jade)}
+.switch.price button{color:var(--jade)}
+body.mode-net .switch.price button[data-mode="net"],
+body.mode-sell .switch.price button[data-mode="sell"]{background:var(--jade);color:#fff}
+.hint{font-size:12px;color:var(--ink-soft);width:100%;margin-top:-2px}
+
+/* ===== price token ===== */
+.amt{border:0;background:transparent;padding:0;margin:0;color:inherit;cursor:pointer;
+  white-space:nowrap;border-bottom:1px dashed var(--jade-line)}
+.amt:hover{border-bottom-color:var(--vermilion)}
+.amt:focus-visible{outline:2px solid var(--vermilion);outline-offset:3px;border-radius:2px}
+.amt .v{font-variant-numeric:tabular-nums;font-weight:700}
+body.mode-sell .amt .v{color:var(--vermilion)}
+.tagmode{display:inline-block;margin-left:6px;font-size:10px;font-weight:700;letter-spacing:.08em;
+  padding:1px 6px;border-radius:3px;vertical-align:2px;background:var(--jade-tint);color:var(--jade)}
+body.mode-sell .tagmode{background:#f6e6e2;color:var(--vermilion)}
+body.mode-net .tagmode::after{content:"NET"}
+body.mode-sell .tagmode::after{content:"SELL"}
+
+/* ===== shared layout ===== */
+main{max-width:1080px;margin:0 auto;padding:0 28px 90px}
+section{padding:62px 0;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:0}
+.kicker{font-size:12.5px;color:var(--jade);font-weight:700;letter-spacing:.1em;margin-bottom:9px}
+h2{font-size:29px;margin:0 0 5px}
+.headsub{display:block;margin-bottom:25px;font-size:13.5px;color:var(--ink-soft)}
+.lead{font-size:16.5px;max-width:66ch;color:var(--ink-soft)}
+
+/* ===== TOUR hero ===== */
+.hero{position:relative;min-height:540px;display:flex;align-items:flex-end;
+  background:linear-gradient(160deg,#1d3a34,#16232b);overflow:hidden}
+.hero .bg{position:absolute;inset:0;opacity:.45}
+.hero .bg img{filter:saturate(.88)}
+.hero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(9,18,23,.93) 0%,rgba(9,18,23,.3) 55%,rgba(9,18,23,.55) 100%)}
+.hero-in{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:56px 28px;color:#fff;width:100%}
+.hero .tag{display:inline-block;font-size:12px;letter-spacing:.16em;color:#cfe0d8;
+  border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:5px 14px;margin-bottom:20px}
+.hero h1{font-size:clamp(32px,5.2vw,56px);margin:0 0 13px;color:#fff;max-width:17ch}
+.hero .tagline{font-size:16px;color:#dfe9e4;max-width:56ch;margin:0 0 28px}
+.hero-facts{display:flex;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.25);padding-top:19px}
+.hero-facts > div{padding-right:32px;margin-right:32px;border-right:1px solid rgba(255,255,255,.18)}
+.hero-facts > div:last-child{border-right:0;margin-right:0;padding-right:0}
+.hero-facts b{display:block;font-family:"Nanum Myeongjo",serif;font-size:21px;color:#fff;font-weight:700}
+.hero-facts small{font-size:12px;color:#b9cdc5;letter-spacing:.04em}
+.hero-facts .fprice b{font-size:22px}
+.hero-facts .amt{border-bottom-color:rgba(255,255,255,.45)}
+.hero-facts .amt:hover{border-bottom-color:#f3b6a6}
+.hero-facts .amt .v{color:#fff;font-family:"Nanum Myeongjo",serif;font-weight:700}
+body.mode-sell .hero-facts .amt .v{color:#f7c9bb}
+.hero-facts .tagmode{background:rgba(255,255,255,.16);color:#dfe9e4}
+body.mode-sell .hero-facts .tagmode{background:rgba(247,201,187,.2);color:#f7c9bb}
+
+/* ===== spec ===== */
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.spec > div{background:#fff;padding:20px 22px}
+.spec dt{font-size:12px;color:var(--jade);font-weight:700;letter-spacing:.06em;margin-bottom:6px}
+.spec dd{margin:0;font-size:15px;font-weight:500}
+.spec dd small{display:block;font-weight:400;color:var(--ink-soft);font-size:12px;margin-top:3px}
+
+/* ===== guest ===== */
+.guest{display:grid;grid-template-columns:1.1fr 1fr;gap:42px;align-items:start}
+.persona{background:var(--jade-tint);border-left:3px solid var(--jade);padding:26px 28px}
+.persona h3{font-size:19px;margin:0 0 4px;color:var(--jade)}
+.persona p{margin:8px 0 0;font-size:14.5px;color:#33474a}
+.needs{list-style:none;margin:0;padding:0}
+.needs li{padding:14px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:118px 1fr;gap:16px;font-size:14.5px}
+.needs li:first-child{border-top:1px solid var(--rule)}
+.needs b{color:var(--jade);font-weight:700;font-size:13px}
+
+/* ===== days ===== */
+.day{display:grid;grid-template-columns:88px 1fr;gap:30px;padding:40px 0;border-top:1px solid var(--rule)}
+.day:first-of-type{border-top:0}
+.dnum{font-family:"Nanum Myeongjo",serif;font-size:15px;font-weight:700;color:var(--jade);
+  border-top:2px solid var(--jade);padding-top:10px;line-height:1.35}
+.dnum em{display:block;font-style:normal;font-size:34px;color:var(--ink);letter-spacing:-.02em}
+.dbody h3{font-size:23px;margin:0 0 3px}
+.dsub{display:block;margin-bottom:18px;font-size:13.5px;color:var(--ink-soft)}
+.route{font-size:13.5px;color:var(--jade);background:var(--jade-tint);
+  padding:11px 15px;border-radius:4px;margin-bottom:20px;line-height:1.9}
+.pics{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:20px 0}
+.pic{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:3px;
+  background:linear-gradient(135deg,var(--jade-tint),#dfe7e3)}
+.pic figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 12px 8px;color:#fff;font-size:11.5px;
+  background:linear-gradient(to top,rgba(0,0,0,.74),transparent)}
+.wide{grid-template-columns:1fr;margin-bottom:10px}
+.wide .pic{aspect-ratio:32/9}
+.detail{margin:0 0 20px;font-size:15px;color:#2c3d45;max-width:70ch}
+.spots{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:11px}
+.spots li{padding-left:18px;position:relative;font-size:14.5px}
+.spots li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:1px;background:var(--jade)}
+.spots em{font-style:normal;color:var(--ink-soft);font-size:13.5px}
+.cost{border-top:1px solid var(--rule);padding-top:14px;font-size:14px}
+.cost table{width:100%;border-collapse:collapse}
+.cost td{padding:5px 0;vertical-align:top}
+.cost td:last-child{text-align:right;white-space:nowrap}
+.cost tr.sum td{border-top:1px solid var(--rule);padding-top:11px;font-weight:700;font-size:15.5px}
+.selfpay{color:var(--ink-soft);font-size:12.5px;font-style:italic}
+
+/* ===== price ===== */
+.ptable{width:100%;border-collapse:collapse;font-size:15px;margin-bottom:26px}
+.ptable th{text-align:left;font-size:12px;letter-spacing:.07em;color:var(--jade);
+  border-bottom:1.5px solid var(--jade);padding:0 10px 10px}
+.ptable th:last-child,.ptable td:last-child{text-align:right}
+.ptable td{padding:12px 10px;border-bottom:1px solid var(--rule)}
+.ptable td:first-child{font-weight:500}
+.ptable tr.total td{border-bottom:0;border-top:2px solid var(--ink);
+  font-family:"Nanum Myeongjo",serif;font-size:20px;font-weight:800;padding-top:16px}
+.ptable small{display:block;color:var(--ink-soft);font-size:12.5px;font-weight:400}
+.pp{background:var(--ink);color:#fff;padding:28px 30px;display:flex;
+  justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;border-radius:4px}
+.pp .lab{font-size:13px;color:#a8bcb5;letter-spacing:.06em}
+.pp .big{font-family:"Nanum Myeongjo",serif;font-size:38px;font-weight:800;line-height:1.1}
+.pp .myr{font-size:13px;color:#a8bcb5;margin-top:5px}
+.pp .amt{border-bottom-color:rgba(255,255,255,.35)}
+.pp .side{max-width:34ch;font-size:13px;line-height:1.7;color:#a8bcb5}
+body.mode-sell .pp .amt .v{color:#f3b6a6}
+
+/* ===== inclusion ===== */
+.two{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule)}
+.two > div{padding:28px 30px}
+.two > div:first-child{border-right:1px solid var(--rule);background:var(--mist)}
+.two h3{font-size:17px;margin:0 0 16px}
+.two h3.yes{color:var(--jade)} .two h3.no{color:var(--vermilion)}
+.two ul{list-style:none;margin:0;padding:0;font-size:14px;line-height:1.55}
+.two li{padding:7px 0 7px 22px;position:relative;border-bottom:1px dotted var(--rule)}
+.two li:last-child{border-bottom:0}
+.two .yeslist li::before{content:"\2713";position:absolute;left:0;color:var(--jade);font-weight:700}
+.two .nolist li::before{content:"\2013";position:absolute;left:0;color:var(--vermilion);font-weight:700}
+
+.note{border:1px solid var(--gold);border-left:4px solid var(--gold);
+  background:#fdfaf3;padding:22px 26px;margin-top:32px}
+.note h3{font-size:16px;margin:0 0 12px;color:#7d6528}
+.note ol{margin:0;padding-left:20px;font-size:14px;line-height:1.75;color:#4a4230}
+.note li{margin-bottom:9px} .note li:last-child{margin-bottom:0}
+.note p{margin:0 0 10px;font-size:14px;color:#4a4230}
+.note p:last-child{margin-bottom:0}
+
+/* ===== bridge to beauty ===== */
+.bridge{position:relative;overflow:hidden;border-radius:6px;margin-top:14px;
+  background:linear-gradient(120deg,#3c2733 0%,#6b3f4c 55%,#9c5c68 100%)}
+.bridge .bimg{position:absolute;inset:0;opacity:.3}
+.bridge .bin{position:relative;z-index:2;padding:40px 38px;display:flex;
+  justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
+.bridge h3{margin:0 0 9px;color:#fff;font-size:23px}
+.bridge p{margin:0;font-size:14.5px;line-height:1.7;max-width:54ch;color:#f0dade}
+.bridge .go{display:inline-block;background:#fff;color:var(--plum);border:0;
+  padding:14px 26px;border-radius:4px;font-weight:700;font-size:14.5px;cursor:pointer;white-space:nowrap}
+.bridge .go:hover{background:var(--rose-tint)}
+
+.appendix{background:var(--mist);margin:0 -28px;padding:62px 28px}
+.appendix .inner{max-width:1024px;margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin:26px 0}
+.step{background:#fff;border-top:2px solid var(--jade);padding:20px 22px}
+.step b{display:block;font-family:"Nanum Myeongjo",serif;font-size:15px;margin-bottom:8px}
+.step p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+.mini{font-size:14.5px;margin:26px 0 4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px}
+.chips span{background:#fff;border:1px solid var(--jade-line);color:var(--jade);
+  padding:7px 15px;border-radius:999px;font-size:13.5px}
+.bullets{font-size:14px;line-height:1.85;padding-left:20px;margin-top:6px;color:#2c3d45}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);line-height:1.75;
+  border-top:1px solid var(--rule);padding-top:18px;margin-top:26px}
+
+/* ================= BEAUTY VIEW ================= */
+#view-beauty .bhero{position:relative;overflow:hidden;
+  background:
+    radial-gradient(80% 60% at 82% 8%, #f6dfe2 0%, rgba(246,223,226,0) 62%),
+    radial-gradient(70% 55% at 8% 88%, #f1e3d4 0%, rgba(241,227,212,0) 60%),
+    linear-gradient(165deg,#fdf8f7 0%,#f9edee 52%,#f3dfe2 100%)}
+#view-beauty .bhero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rose-line)}
+.bhero-in{max-width:1080px;margin:0 auto;padding:76px 28px 66px;position:relative;z-index:3}
+.orb{position:absolute;border-radius:50%;filter:blur(46px);opacity:.55;z-index:1}
+.orb.a{width:340px;height:340px;background:#f0c7cf;right:-70px;top:-90px}
+.orb.b{width:260px;height:260px;background:#f2dfb8;right:170px;top:130px;opacity:.45}
+.orb.c{width:200px;height:200px;background:#e8d4dd;left:-60px;bottom:-60px;opacity:.5}
+.script{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:300;
+  font-size:22px;color:var(--rose-deep);letter-spacing:.02em;margin-bottom:6px}
+.bhero h1{font-size:clamp(34px,5.6vw,58px);margin:0 0 16px;color:var(--plum);max-width:15ch}
+.bhero .tagline{font-size:16.5px;color:var(--plum-soft);max-width:52ch;margin:0 0 26px}
+.period{display:inline-flex;align-items:center;gap:10px;background:var(--plum);color:#f4dde1;
+  padding:10px 22px;border-radius:999px;font-size:13.5px;letter-spacing:.03em}
+.period::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--champagne)}
+.bstats{display:flex;gap:0;flex-wrap:wrap;margin-top:34px;border-top:1px solid var(--rose-line);padding-top:20px}
+.bstats > div{padding-right:34px;margin-right:34px;border-right:1px solid var(--rose-line)}
+.bstats > div:last-child{border-right:0;margin-right:0;padding-right:0}
+.bstats b{display:block;font-family:"Cormorant Garamond",serif;font-size:34px;font-weight:600;
+  color:var(--rose-deep);line-height:1}
+.bstats small{font-size:12px;color:var(--plum-soft);letter-spacing:.05em}
+
+#view-beauty main{padding-bottom:80px}
+#view-beauty section{border-top:1px solid var(--rose-line);padding:58px 0}
+#view-beauty .kicker{color:var(--rose-deep)}
+#view-beauty h2{color:var(--plum)}
+#view-beauty .headsub,#view-beauty .lead{color:var(--plum-soft)}
+
+.bgallery{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px;margin:30px 0 0}
+.bshot{position:relative;overflow:hidden;border-radius:6px;aspect-ratio:4/3;
+  background:linear-gradient(140deg,#f4e2e4,#ead3d7)}
+.bshot.tall{aspect-ratio:3/4}
+.bshot figcaption{position:absolute;left:0;right:0;bottom:0;padding:20px 14px 11px;color:#fff;font-size:11.5px;
+  background:linear-gradient(to top,rgba(50,25,32,.78),transparent)}
+
+.bflow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:26px}
+.bcard{background:#fff;border:1px solid var(--rose-line);border-radius:6px;padding:22px 23px;position:relative}
+.bcard .no{font-family:"Cormorant Garamond",serif;font-size:30px;color:var(--rose);line-height:1;
+  display:block;margin-bottom:9px}
+.bcard b{display:block;font-family:"Nanum Myeongjo",serif;font-size:15px;margin-bottom:7px;color:var(--plum)}
+.bcard p{margin:0;font-size:13.5px;color:var(--plum-soft);line-height:1.65}
+
+.cat{margin-bottom:44px}
+.cathead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  border-bottom:1.5px solid var(--rose);padding-bottom:11px;margin-bottom:2px}
+.cathead h3{font-size:22px;margin:0;color:var(--plum)}
+.cathead .cn{font-family:"Cormorant Garamond",serif;font-size:16px;color:var(--rose-deep);letter-spacing:.06em}
+.cathead .count{margin-left:auto;font-size:12.5px;color:var(--plum-soft)}
+.subhead{font-size:12.5px;font-weight:700;color:var(--rose-deep);letter-spacing:.08em;
+  background:var(--rose-tint);display:inline-block;padding:4px 14px;border-radius:999px;margin:22px 0 4px}
+.menu{width:100%;border-collapse:collapse}
+.menu tr{border-bottom:1px solid var(--rose-line)}
+.menu tr:last-child{border-bottom:0}
+.menu td{padding:15px 0;vertical-align:top}
+.menu .item{font-size:15px;font-weight:500;padding-right:22px;line-height:1.55;color:var(--plum)}
+.menu .item .memo{display:block;font-size:12.5px;color:var(--plum-soft);font-weight:400;margin-top:5px;
+  padding-left:13px;border-left:2px solid var(--rose-line)}
+.menu .price{text-align:right;white-space:nowrap;width:1%}
+.was{display:block;font-size:12.5px;color:#b6a0a6;text-decoration:line-through;font-variant-numeric:tabular-nums}
+.now{display:block;font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;
+  font-family:"Cormorant Garamond",serif;color:var(--plum)}
+.off{display:inline-block;margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:.05em;
+  background:var(--rose-deep);color:#fff;padding:2px 7px;border-radius:3px}
+.taxnote{background:var(--rose-tint);border:1px solid var(--rose-line);padding:17px 21px;
+  font-size:13.5px;color:var(--plum-soft);margin-top:12px;border-radius:6px}
+.care{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;
+  background:var(--rose-line);border:1px solid var(--rose-line);border-radius:6px;overflow:hidden}
+.care > div{background:#fff;padding:22px 24px}
+.care b{display:block;font-size:14px;color:var(--rose-deep);margin-bottom:7px}
+.care p{margin:0;font-size:13.5px;color:var(--plum-soft);line-height:1.7}
+.backcta{background:linear-gradient(120deg,#3c2733,#7a4a57);color:#f0dade;padding:34px;border-radius:6px;
+  display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;margin-top:44px}
+.backcta h3{margin:0 0 7px;color:#fff;font-size:21px}
+.backcta p{margin:0;font-size:14px;line-height:1.7;max-width:52ch}
+.backcta button{background:#fff;color:var(--plum);border:0;padding:13px 24px;border-radius:4px;
+  font-weight:700;font-size:14.5px;cursor:pointer;white-space:nowrap}
+#view-beauty .disclaimer{border-top-color:var(--rose-line);color:var(--plum-soft)}
+
+/* ===== footer ===== */
+footer{background:var(--ink);color:#c7d6d0;padding:50px 28px 44px}
+body.view-beauty footer{background:var(--plum);color:#cdb6bd}
+.foot-in{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+footer .logo{color:#fff;margin-bottom:9px}
+footer p{margin:0;font-size:13px;line-height:1.8}
+footer .r{text-align:right;font-size:12.5px;color:#8ba49c}
+body.view-beauty footer .r{color:#a68d95}
+
+@media (max-width:880px){
+  .guest,.two{grid-template-columns:1fr}
+  .two > div:first-child{border-right:0;border-bottom:1px solid var(--rule)}
+  .day{grid-template-columns:1fr;gap:14px}
+  .dnum{display:flex;align-items:baseline;gap:12px;border-top:0;padding-top:0}
+  .dnum em{font-size:26px}
+  .hero-facts > div{border-right:0;padding-right:0;margin-right:0;width:50%;margin-bottom:13px}
+  .bstats > div{border-right:0;padding-right:0;margin-right:0;width:50%;margin-bottom:16px}
+  .needs li{grid-template-columns:1fr;gap:4px}
+  .bgallery{grid-template-columns:1fr 1fr}
+  .bshot.tall{aspect-ratio:4/3}
+  main{padding:0 20px 60px}
+  .appendix{margin:0 -20px;padding:52px 20px}
+  .bar-in,.hero-in,.bhero-in{padding-left:20px;padding-right:20px}
+}
+@media print{ .bar{position:static} section,.cat,.day{page-break-inside:avoid} }
+</style>
+</head>
+<body class="view-tour lang-ko mode-net">
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="logo">DAY<span>DAY</span>TOUR</div>
+    <div class="tabs" role="group" aria-label="Page">
+      <button type="button" data-view="tour"><span class="k">상품소개서</span><span class="e">Brochure</span></button>
+      <button type="button" data-view="beauty"><span class="k">K-Beauty 프로그램</span><span class="e">K-Beauty</span></button>
+    </div>
+    <div class="spacer"></div>
+    <div class="ctrls">
+      <div class="switch lang" role="group" aria-label="Language">
+        <button type="button" data-lang="ko">한국어</button>
+        <button type="button" data-lang="en">English</button>
+      </div>
+      <div class="switch price" role="group" aria-label="Price mode">
+        <button type="button" data-mode="net"><span class="k">원가 NET</span><span class="e">NET</span></button>
+        <button type="button" data-mode="sell"><span class="k">판매가 SELL</span><span class="e">SELL</span></button>
+      </div>
+    </div>
+    <div class="hint">
+      <span class="k">금액을 클릭하면 원가(NET) ↔ 판매가(SELL)로 전환됩니다.</span>
+      <span class="e">Click any amount to switch between net cost (NET) and selling price (SELL).</span>
+    </div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- ============================ TOUR ================================= -->
+<!-- =================================================================== -->
+<div id="view-tour">
+
+<header class="hero">
+  <div class="bg"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Gyeongbokgung%20Mar%202025%2040.jpg?width=1800" alt="Gyeongbokgung Palace"></div>
+  <div class="hero-in">
+    <span class="tag">NEW PRODUCT · B2B SALES KIT</span>
+    <h1 class="k">서울 K-Beauty<br>6일 5박 프라이빗 투어</h1>
+    <h1 class="e">Seoul K-Beauty<br>6 Days &amp; 5 Nights Private Tour</h1>
+    <p class="tagline k">서울의 고궁·자연·쇼핑에 전문 뷰티 컨설팅과 전용 Beauty Day를 결합한 프라이빗 차량 상품입니다. 말레이시아 여성 여행객을 위해 설계되었습니다.</p>
+    <p class="tagline e">A private-vehicle product combining Seoul's palaces, nature and shopping with a professional beauty consultation and a dedicated Beauty Day. Designed for Malaysian female travellers.</p>
+    <div class="hero-facts">
+      <div><b>6D 5N</b><small class="k">일정</small><small class="e">Duration</small></div>
+      <div><b>4 PAX</b><small class="k">기준 인원</small><small class="e">Base occupancy</small></div>
+      <div><b>STARIA</b><small class="k">전용 차량</small><small class="e">Private vehicle</small></div>
+      <div><b>9 HRS</b><small class="k">1일 전세</small><small class="e">Charter per day</small></div>
+      <div class="fprice"><b><button class="amt" type="button"><span class="v net">&#8361;420,000</span><span class="v sell">&#8361;525,000</span></button></b><small class="k">1인 평균</small><small class="e">Per person</small></div>
+      <div class="fprice"><b><button class="amt" type="button"><span class="v net">&#8361;1,680,000</span><span class="v sell">&#8361;2,100,000</span><span class="tagmode"></span></button></b><small class="k">4인 1차량 총액</small><small class="e">Total, 4 pax</small></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="overview">
+  <p class="kicker"><span class="k">상품 개요</span><span class="e">OVERVIEW</span></p>
+  <h2 class="k">한 번의 여행에서 관광과 뷰티를 모두</h2>
+  <h2 class="e">Sightseeing and beauty in a single trip</h2>
+  <span class="headsub k">Product overview</span><span class="headsub e">상품 개요</span>
+  <p class="lead k" style="margin-bottom:30px">DAY 1–3은 서울 고궁과 남이섬·춘천 자연을 여유롭게 둘러보고, DAY 4에 전문 컨설팅을 받은 뒤 DAY 5 하루를 온전히 뷰티에 씁니다. 시술 여부와 종류는 상담 후 고객이 직접 결정하며, 일정은 회복 시간을 고려해 후반부로 배치했습니다.</p>
+  <p class="lead e" style="margin-bottom:30px">Days 1–3 cover Seoul's palaces and the countryside around Nami Island and Chuncheon at an unhurried pace. Day 4 is the professional consultation, and Day 5 is given over entirely to beauty. Guests decide for themselves whether and what to proceed with, and the beauty days sit late in the trip so recovery time is available.</p>
+
+  <div class="spec">
+    <div><dt class="k">상품 코드</dt><dt class="e">Product code</dt><dd>DDT-SEL-KB6<small>Seoul K-Beauty 6D5N</small></dd></div>
+    <div><dt class="k">지역</dt><dt class="e">Regions</dt><dd><span class="k">서울 · 남이섬 · 춘천</span><span class="e">Seoul · Nami Island · Chuncheon</span><small class="k">Seoul / Nami Island / Chuncheon</small><small class="e">서울 / 남이섬 / 춘천</small></dd></div>
+    <div><dt class="k">차량</dt><dt class="e">Vehicle</dt><dd><span class="k">현대 STARIA 전용차</span><span class="e">Hyundai STARIA, private</span><small class="k">기사 포함</small><small class="e">Driver included</small></dd></div>
+    <div><dt class="k">가이드 언어</dt><dt class="e">Guide languages</dt><dd><span class="k">한국어 · 중국어 · 영어</span><span class="e">Korean · Mandarin · English</span><small class="k">영어 기사·가이드는 추가 요금</small><small class="e">English driver-guide carries a surcharge</small></dd></div>
+    <div><dt class="k">기준 인원</dt><dt class="e">Base group</dt><dd><span class="k">성인 4인 · 1차량</span><span class="e">4 adults, one vehicle</span><small class="k">인원 변동 시 재견적</small><small class="e">Re-quote if group size changes</small></dd></div>
+    <div><dt class="k">미포함</dt><dt class="e">Not included</dt><dd><span class="k">항공 · 숙박 · 식사</span><span class="e">Flights · accommodation · meals</span><small class="k">요청 시 별도 견적</small><small class="e">Separate quotation on request</small></dd></div>
+  </div>
+</section>
+
+<section id="guest">
+  <p class="kicker"><span class="k">타깃 고객</span><span class="e">TARGET GUEST</span></p>
+  <h2 class="k">말레이시아 30–40대 여성</h2>
+  <h2 class="e">Malaysian women, 30s to 40s</h2>
+  <span class="headsub k">Target guest</span><span class="headsub e">타깃 고객</span>
+
+  <div class="guest">
+    <div class="persona">
+      <h3 class="k">모녀 · 자매 · 친구 4인 그룹</h3>
+      <h3 class="e">Groups of four — mothers and daughters, sisters, friends</h3>
+      <p class="k">대중교통보다 프라이빗 차량을 선호하고, 하루에 많은 곳을 도는 것보다 사진이 잘 나오는 장소에서 충분히 머무는 것을 좋아합니다. 뷰티·스킨케어에 관심이 높고, 한국에서 받는 관리 자체를 여행의 목적으로 여깁니다.</p>
+      <p class="e">They prefer a private vehicle over public transport, and would rather spend real time at a few photogenic places than rush through many. Beauty and skincare matter to them, and treatment in Korea is a reason for the trip in itself.</p>
+      <p class="k" style="margin-top:14px"><strong>구매 결정 요인</strong> — 이동의 편안함, 무슬림 프렌들리 식사 가능 여부, 시술 가격의 투명성, 여성 상담 인력 배치 여부.</p>
+      <p class="e" style="margin-top:14px"><strong>What closes the sale</strong> — comfortable transport, Muslim-friendly dining, transparent treatment pricing, and female consultants on request.</p>
+    </div>
+
+    <ul class="needs">
+      <li><b class="k">식사</b><b class="e">Dining</b>
+        <span class="k">DAY 2 저녁은 할랄/무슬림 프렌들리 식당으로 기본 배정. 요청 시 전 일정 무슬림 프렌들리 식당으로 대체 가능합니다.</span>
+        <span class="e">Dinner on Day 2 is booked at a halal or Muslim-friendly restaurant as standard. On request, every meal can be swapped to Muslim-friendly venues.</span></li>
+      <li><b class="k">기도 공간</b><b class="e">Prayer space</b>
+        <span class="k">인천공항·COEX·명동·남이섬에 기도실 또는 예배 공간이 있어 일정 중 안내가 가능합니다.</span>
+        <span class="e">Prayer rooms are available at Incheon Airport, COEX, Myeongdong and Nami Island, and the driver can direct guests to them.</span></li>
+      <li><b class="k">한복</b><b class="e">Hanbok</b>
+        <span class="k">긴소매·긴치마 등 노출이 적은 디자인 선택 가능. 히잡 착용 상태로도 이용할 수 있습니다.</span>
+        <span class="e">Modest designs with long sleeves and full skirts can be selected, and hanbok can be worn over a hijab.</span></li>
+      <li><b class="k">뷰티 상담</b><b class="e">Consultation</b>
+        <span class="k">여성 상담사·여성 시술자 배정 요청을 사전에 전달합니다.</span>
+        <span class="e">Requests for female consultants and practitioners are passed to the clinic in advance.</span></li>
+      <li><b class="k">일정 강도</b><b class="e">Pacing</b>
+        <span class="k">뷰티 2일(DAY 4 상담 · DAY 5 시술)과 자유·저강도 3일(DAY 1 · DAY 5 오후 · DAY 6)로 구성됩니다. 두 비중은 <strong>출발 전 사전 미팅을 통해 조정</strong>할 수 있습니다.</span>
+        <span class="e">Two beauty days (Day 4 consultation, Day 5 treatment) and three low-intensity or free days (Day 1, the Day 5 afternoon, Day 6). The balance <strong>can be adjusted at a pre-departure planning meeting</strong>.</span></li>
+    </ul>
+  </div>
+
+  <div class="note">
+    <h3 class="k">영업 참고 — 판매 전 확인 사항</h3>
+    <h3 class="e">Sales notes — check before quoting</h3>
+    <ol class="k">
+      <li>DAY 2 점심 <strong>토속촌 삼계탕</strong>과 DAY 3 <strong>춘천 닭갈비</strong>는 할랄 인증 업소가 아닙니다. 무슬림 고객 예약 시 무슬림 프렌들리 대체 식당으로 안내하고, 확정 일정표에 반영해 주세요.</li>
+      <li>비자 및 K-ETA 정책은 수시로 변경됩니다. 출발 전 대한민국 법무부·K-ETA 공식 사이트에서 최신 내용을 반드시 확인하고 안내해 주세요.</li>
+      <li>의료 시술은 <strong>상담 후 고객이 직접 결정</strong>합니다. 효과·안전성에 대한 확정적 표현은 판매 과정에서 사용하지 마시고, 시술 내용과 가격은 의료기관 설명을 최종 기준으로 안내해 주세요.</li>
+      <li>성수기(말레이시아 학교 방학, 하리라야 연휴, 10–11월 단풍)에는 차량·기사 확보가 어려우므로 최소 4주 전 예약을 권장합니다.</li>
+    </ol>
+    <ol class="e">
+      <li><strong>Tosokchon samgyetang</strong> (Day 2 lunch) and <strong>Chuncheon dakgalbi</strong> (Day 3 lunch) are not halal-certified. For Muslim guests, substitute Muslim-friendly venues and reflect this in the confirmed itinerary.</li>
+      <li>Visa and K-ETA rules change frequently. Verify the current position on the Korean Ministry of Justice and official K-ETA sites before departure.</li>
+      <li>Medical treatments are <strong>chosen by the guest after consultation</strong>. Do not make claims about outcomes or safety when selling; the clinic's own explanation of procedures and prices is final.</li>
+      <li>Vehicles and drivers are hard to secure in peak periods (Malaysian school holidays, Hari Raya, autumn foliage in October–November). Book at least four weeks ahead.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="itinerary">
+  <p class="kicker"><span class="k">일정</span><span class="e">ITINERARY</span></p>
+  <h2 class="k">6일 5박 상세 일정</h2>
+  <h2 class="e">Day-by-day itinerary</h2>
+  <span class="headsub k">Day-by-day itinerary</span><span class="headsub e">6일 5박 상세 일정</span>
+
+  <!-- DAY 1 -->
+  <div class="day">
+    <div class="dnum">DAY<em>01</em></div>
+    <div class="dbody">
+      <h3 class="k">인천공항 도착 · 호텔 이동</h3>
+      <h3 class="e">Arrival at Incheon and hotel transfer</h3>
+      <span class="dsub k">Arrival &amp; hotel transfer</span><span class="dsub e">인천공항 도착 · 호텔 이동</span>
+      <div class="route k">인천국제공항 → STARIA 전용차 픽업 → 서울 시내 호텔</div>
+      <div class="route e">Incheon International Airport → private STARIA pickup → hotel in central Seoul</div>
+
+      <div class="pics wide">
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seoul%20at%20N%20Seoul%20Tower.jpg?width=1600" alt="Seoul skyline"><figcaption>서울 시내 전경 · Arriving in Seoul</figcaption></figure>
+      </div>
+
+      <p class="detail k">도착 당일은 관광 일정을 넣지 않습니다. 장거리 비행 후 체크인과 휴식에 충분한 시간을 두고, 기사님이 호텔 로비까지 안내합니다.</p>
+      <p class="detail e">No sightseeing is scheduled on arrival day. Guests get ample time to check in and rest after a long flight, and the driver sees them to the hotel lobby.</p>
+      <div class="cost"><table>
+        <tr><td><span class="k">인천공항 → 서울 시내 픽업 (1차량)</span><span class="e">Incheon Airport → central Seoul pickup (per vehicle)</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;110,000</span><span class="v sell">&#8361;137,500</span></button></td></tr>
+        <tr class="sum"><td><span class="k">DAY 1 합계</span><span class="e">Day 1 total</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;110,000</span><span class="v sell">&#8361;137,500</span><span class="tagmode"></span></button></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day">
+    <div class="dnum">DAY<em>02</em></div>
+    <div class="dbody">
+      <h3 class="k">서울 클래식 · 고궁과 시장</h3>
+      <h3 class="e">Seoul classics — palace, hanok, market, tower</h3>
+      <span class="dsub k">Palace, hanok, market, tower</span><span class="dsub e">서울 클래식 · 고궁과 시장</span>
+      <div class="route k">경복궁 한복 체험 → 북촌한옥마을 → 점심 → 광장시장 → 남산 케이블카·서울타워 → 무슬림 프렌들리 저녁</div>
+      <div class="route e">Gyeongbokgung with hanbok → Bukchon Hanok Village → lunch → Gwangjang Market → Namsan cable car &amp; Seoul Tower → Muslim-friendly dinner</div>
+
+      <div class="pics wide">
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seoul%20Gyeongbok-gung-3.jpg?width=1600" alt="Geunjeongjeon"><figcaption>경복궁 근정전 · Geunjeongjeon, Gyeongbokgung</figcaption></figure>
+      </div>
+      <div class="pics" style="margin-top:0">
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Bukchon%20Village%20Seoul.jpg?width=900" alt="Bukchon Hanok Village"><figcaption>북촌한옥마을 · Bukchon Hanok Village</figcaption></figure>
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Gwangjang%20Market,%20Seoul%2001.jpg?width=900" alt="Gwangjang Market"><figcaption>광장시장 · Gwangjang Market</figcaption></figure>
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cable%20car%20up%20the%20Seoul%20Tower%20(33580430468).jpg?width=900" alt="Namsan cable car"><figcaption>남산 케이블카 · Namsan Cable Car</figcaption></figure>
+      </div>
+
+      <ul class="spots k">
+        <li><strong>경복궁 · 한복 체험</strong> <em>— 조선 왕조의 정궁. 한복을 입으면 입장료가 면제되며, 근정전과 경회루 일대가 대표 촬영 지점입니다. 화요일 휴궁.</em></li>
+        <li><strong>북촌한옥마을</strong> <em>— 실제 거주 구역이라 입장 가능 시간이 10:00–17:00로 제한됩니다. 정숙 관람 안내 필요.</em></li>
+        <li><strong>광장시장</strong> <em>— 100년 넘은 전통시장. 길거리 음식과 원단·한복 매장이 함께 있습니다.</em></li>
+        <li><strong>남산 케이블카 · 서울타워</strong> <em>— 왕복 케이블카 포함. 일몰 전후 도착을 권장합니다.</em></li>
+      </ul>
+      <ul class="spots e">
+        <li><strong>Gyeongbokgung with hanbok</strong> <em>— the main palace of the Joseon dynasty. Admission is free in hanbok, and Geunjeongjeon and Gyeonghoeru are the signature photo spots. Closed Tuesdays.</em></li>
+        <li><strong>Bukchon Hanok Village</strong> <em>— a working residential area; visitor access is limited to 10:00–17:00 and guests should keep noise down.</em></li>
+        <li><strong>Gwangjang Market</strong> <em>— a traditional market over a century old, with street food alongside fabric and hanbok stalls.</em></li>
+        <li><strong>Namsan cable car and Seoul Tower</strong> <em>— return cable car included; arriving around sunset is recommended.</em></li>
+      </ul>
+
+      <div class="cost"><table>
+        <tr><td><span class="k">STARIA 서울 시내 9시간 전세</span><span class="e">STARIA charter, 9 hours in Seoul</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;260,000</span><span class="v sell">&#8361;325,000</span></button></td></tr>
+        <tr><td><span class="k">경복궁 입장 &#8361;3,000 × 4</span><span class="e">Gyeongbokgung admission &#8361;3,000 × 4</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;12,000</span><span class="v sell">&#8361;15,000</span></button></td></tr>
+        <tr><td><span class="k">한복 체험 &#8361;20,000 × 4</span><span class="e">Hanbok rental &#8361;20,000 × 4</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;80,000</span><span class="v sell">&#8361;100,000</span></button></td></tr>
+        <tr><td><span class="k">남산 케이블카 왕복 &#8361;15,000 × 4</span><span class="e">Namsan cable car, return &#8361;15,000 × 4</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;60,000</span><span class="v sell">&#8361;75,000</span></button></td></tr>
+        <tr><td class="selfpay"><span class="k">점심·저녁 식사 — 고객 자부담</span><span class="e">Lunch and dinner — guest's own account</span></td>
+          <td class="selfpay"><span class="k">별도</span><span class="e">excl.</span></td></tr>
+        <tr class="sum"><td><span class="k">DAY 2 합계</span><span class="e">Day 2 total</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;412,000</span><span class="v sell">&#8361;515,000</span><span class="tagmode"></span></button></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day">
+    <div class="dnum">DAY<em>03</em></div>
+    <div class="dbody">
+      <h3 class="k">남이섬 · 춘천 자연 일일 투어</h3>
+      <h3 class="e">Nami Island and Chuncheon day trip</h3>
+      <span class="dsub k">Nami Island &amp; Chuncheon</span><span class="dsub e">남이섬 · 춘천 자연 일일 투어</span>
+      <div class="route k">서울 출발 → 김유정 레일바이크 → 춘천 닭갈비 → 남이섬 → 쁘띠프랑스 → 이탈리아마을 → 서울 복귀</div>
+      <div class="route e">Depart Seoul → Gimyujeong rail bike → Chuncheon dakgalbi → Nami Island → Petite France → Italian Village → return to Seoul</div>
+
+      <div class="pics wide">
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Nami%20Island%20(South%20Korea)%20banner%20Tree%20Lane.JPG?width=1800" alt="Metasequoia Lane, Nami Island"><figcaption>남이섬 메타세쿼이아 길 · Metasequoia Lane, Nami Island</figcaption></figure>
+      </div>
+      <div class="pics" style="margin-top:0">
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Nami%20island%20winter.jpg?width=900" alt="Nami Island in winter"><figcaption>남이섬 설경 · Nami Island in winter</figcaption></figure>
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Nami%20Island%20(South%20Korea)%20banner%20Pine%20tree%20lane.JPG?width=900" alt="Pine Tree Lane"><figcaption>잣나무길 · Pine Tree Lane</figcaption></figure>
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Korean%20Food%20Dakgalbi.JPG?width=900" alt="Chuncheon dakgalbi"><figcaption>춘천 닭갈비 · Chuncheon dakgalbi</figcaption></figure>
+      </div>
+
+      <ul class="spots k">
+        <li><strong>김유정 레일바이크</strong> <em>— 폐선로를 따라 달리는 4인승 레일바이크. 북한강과 춘천 외곽 풍경 구간.</em></li>
+        <li><strong>남이섬</strong> <em>— 왕복 선박 포함. 메타세쿼이아 길과 잣나무길이 대표 촬영 구간이며, 10–11월 단풍 시즌이 가장 인기 있습니다.</em></li>
+        <li><strong>쁘띠프랑스</strong> <em>— 어린왕자 테마의 프랑스풍 마을. 색감이 강해 사진이 잘 나옵니다.</em></li>
+        <li><strong>이탈리아마을</strong> <em>— 쁘띠프랑스와 도보 연결. 두 곳을 묶어서 관람합니다.</em></li>
+      </ul>
+      <ul class="spots e">
+        <li><strong>Gimyujeong rail bike</strong> <em>— a four-seat rail bike along a disused railway, past the Bukhan River and the countryside outside Chuncheon.</em></li>
+        <li><strong>Nami Island</strong> <em>— return ferry included. Metasequoia Lane and Pine Tree Lane are the signature stretches; October–November foliage is the peak season.</em></li>
+        <li><strong>Petite France</strong> <em>— a French-style village themed on The Little Prince, with strong colour that photographs well.</em></li>
+        <li><strong>Italian Village</strong> <em>— walkable from Petite France; the two are visited together.</em></li>
+      </ul>
+
+      <div class="cost"><table>
+        <tr><td><span class="k">STARIA 9시간 전세 (경기·강원 구간)</span><span class="e">STARIA charter, 9 hours (Gyeonggi / Gangwon route)</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;300,000</span><span class="v sell">&#8361;375,000</span></button></td></tr>
+        <tr><td><span class="k">레일바이크 4인승 1대</span><span class="e">Rail bike, one four-seater</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;56,000</span><span class="v sell">&#8361;70,000</span></button></td></tr>
+        <tr><td><span class="k">남이섬 입장 + 왕복 선박 &#8361;19,000 × 4</span><span class="e">Nami Island entry + return ferry &#8361;19,000 × 4</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;76,000</span><span class="v sell">&#8361;95,000</span></button></td></tr>
+        <tr><td><span class="k">쁘띠프랑스 &#8361;12,000 × 4</span><span class="e">Petite France &#8361;12,000 × 4</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;48,000</span><span class="v sell">&#8361;60,000</span></button></td></tr>
+        <tr><td><span class="k">이탈리아마을 &#8361;12,000 × 4</span><span class="e">Italian Village &#8361;12,000 × 4</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;48,000</span><span class="v sell">&#8361;60,000</span></button></td></tr>
+        <tr><td class="selfpay"><span class="k">점심·저녁 식사 — 고객 자부담</span><span class="e">Lunch and dinner — guest's own account</span></td>
+          <td class="selfpay"><span class="k">별도</span><span class="e">excl.</span></td></tr>
+        <tr class="sum"><td><span class="k">DAY 3 합계</span><span class="e">Day 3 total</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;528,000</span><span class="v sell">&#8361;660,000</span><span class="tagmode"></span></button></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day">
+    <div class="dnum">DAY<em>04</em></div>
+    <div class="dbody">
+      <h3 class="k">강남 라이프스타일 · K-Beauty 상담</h3>
+      <h3 class="e">Gangnam lifestyle and K-Beauty consultation</h3>
+      <span class="dsub k">Gangnam &amp; consultation</span><span class="dsub e">강남 라이프스타일 · K-Beauty 상담</span>
+      <div class="route k">COEX 별마당도서관 → 강남 상권 자유 시간 → 자유 점심 → 뷰티 클리닉 방문 → 전문 상담 → 호텔</div>
+      <div class="route e">Starfield Library at COEX → free time in Gangnam → lunch at leisure → clinic visit → consultation → hotel</div>
+
+      <div class="pics wide">
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Starfield%20Library%20COEX%2020240218.jpg?width=1600" alt="Starfield Library COEX"><figcaption>COEX 별마당도서관 · Starfield Library</figcaption></figure>
+      </div>
+
+      <p class="detail k">오전은 강남에서 가볍게 보내고, 오후에 뷰티 클리닉으로 이동해 상담을 받습니다. 상담에서는 피부 상태를 확인하고 각자에게 맞는 방향을 안내받으며, 다음 날 진행할 항목·소요 시간·회복 기간·주의사항을 함께 정리합니다.</p>
+      <p class="detail e">The morning is spent lightly in Gangnam; in the afternoon the group moves to the clinic. Skin condition is assessed, suitable directions explained, and the procedures, timings, recovery periods and precautions for the following day are worked out together.</p>
+
+      <ul class="spots k">
+        <li><strong>COEX 별마당도서관</strong> <em>— 13m 높이 서가가 있는 무료 개방 공간. 강남 대표 촬영지.</em></li>
+        <li><strong>강남 · COEX 상권</strong> <em>— 쇼핑과 카페, 자유 점심. 무슬림 프렌들리 식당 안내 가능.</em></li>
+        <li><strong>뷰티 상담</strong> <em>— 약 90–120분. 통역 지원. 여성 상담사 배정은 사전 요청 시 반영합니다.</em></li>
+      </ul>
+      <ul class="spots e">
+        <li><strong>Starfield Library, COEX</strong> <em>— a free public space with 13-metre bookshelves; one of Gangnam's best-known photo spots.</em></li>
+        <li><strong>Gangnam and COEX</strong> <em>— shopping, cafes and lunch at leisure; Muslim-friendly restaurants can be recommended.</em></li>
+        <li><strong>Beauty consultation</strong> <em>— around 90–120 minutes, with interpretation. A female consultant can be arranged in advance.</em></li>
+      </ul>
+
+      <div class="cost"><table>
+        <tr><td><span class="k">STARIA 서울 시내 9시간 전세</span><span class="e">STARIA charter, 9 hours in Seoul</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;260,000</span><span class="v sell">&#8361;325,000</span></button></td></tr>
+        <tr><td class="selfpay"><span class="k">별마당도서관 무료 / 식사 고객 자부담 / 시술비 별도</span><span class="e">Library free · meals on guest's account · treatment fees separate</span></td>
+          <td class="selfpay"><span class="k">별도</span><span class="e">excl.</span></td></tr>
+        <tr class="sum"><td><span class="k">DAY 4 합계</span><span class="e">Day 4 total</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;260,000</span><span class="v sell">&#8361;325,000</span><span class="tagmode"></span></button></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day">
+    <div class="dnum">DAY<em>05</em></div>
+    <div class="dbody">
+      <h3 class="k">K-Beauty Day</h3><h3 class="e">K-Beauty Day</h3>
+      <span class="dsub k">A full day for the beauty programme</span><span class="dsub e">하루 전체를 뷰티에 배정하는 날</span>
+      <div class="route k">호텔 출발 → 뷰티 프로그램 → 카페·휴식 → 올리브영·강남 쇼핑 → 호텔</div>
+      <div class="route e">Depart hotel → beauty programme → cafe and rest → Olive Young and Gangnam shopping → hotel</div>
+
+      <div class="pics">
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Essential%20natural%20oils%20and%20skin%20care%20products.jpg?width=900" alt="Skincare products"><figcaption>홈케어 상담 · Home-care advice</figcaption></figure>
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Facial%20Cleansing%20toners.jpg?width=900" alt="Facial toners"><figcaption>맞춤 루틴 · A routine for your skin</figcaption></figure>
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Myeongdong%20Crowd%20at%20Christmas,%20Seoul.jpg?width=900" alt="Myeongdong"><figcaption>올리브영 쇼핑 · Olive Young shopping</figcaption></figure>
+      </div>
+
+      <p class="detail k">전날 상담 결과를 바탕으로 고객이 선택한 항목을 진행합니다. 이날은 관광 일정을 배치하지 않고 하루 전체를 뷰티에 배정하며, 종료 후에는 컨디션에 따라 카페 휴식·쇼핑·조기 복귀 중 자유롭게 선택할 수 있습니다. 차량과 기사는 하루 종일 대기합니다.</p>
+      <p class="detail e">Guests proceed with whatever they chose after the consultation. No sightseeing is scheduled; the whole day is given to the beauty programme. Afterwards they can rest at a cafe, shop, or return early. The vehicle and driver stand by all day.</p>
+
+      <div class="bridge">
+        <div class="bimg"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Facial%20Cleansing%20toners.jpg?width=1400" alt=""></div>
+        <div class="bin">
+          <div>
+            <h3 class="k">2026 가을 시즌 프로그램 30종</h3>
+            <h3 class="e">30 programmes, autumn 2026 season</h3>
+            <p class="k">제휴 의료기관 Dr.Petit의 스킨·리프팅·눈가/목·바디 카테고리별 프로모션 가격을 전부 정리했습니다. 프로모션 기간 09.01–10.31.</p>
+            <p class="e">Skin, lifting, eye and neck, and body categories from our partner clinic Dr.Petit, with full season pricing. Promotion runs 1 Sep – 31 Oct.</p>
+          </div>
+          <button class="go" type="button" data-view="beauty"><span class="k">프로그램 가격표 보기</span><span class="e">View the programme list</span></button>
+        </div>
+      </div>
+
+      <div class="cost" style="margin-top:24px"><table>
+        <tr><td><span class="k">STARIA 서울 시내 9시간 전세 (대기 포함)</span><span class="e">STARIA charter, 9 hours in Seoul (standby included)</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;260,000</span><span class="v sell">&#8361;325,000</span></button></td></tr>
+        <tr><td class="selfpay"><span class="k">식사 및 시술비 — 고객 자부담</span><span class="e">Meals and treatment fees — guest's own account</span></td>
+          <td class="selfpay"><span class="k">별도</span><span class="e">excl.</span></td></tr>
+        <tr class="sum"><td><span class="k">DAY 5 합계</span><span class="e">Day 5 total</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;260,000</span><span class="v sell">&#8361;325,000</span><span class="tagmode"></span></button></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day">
+    <div class="dnum">DAY<em>06</em></div>
+    <div class="dbody">
+      <h3 class="k">서울 자유 시간 · 인천공항 샌딩</h3>
+      <h3 class="e">Free time in Seoul and departure transfer</h3>
+      <span class="dsub k">Free morning &amp; departure</span><span class="dsub e">서울 자유 시간 · 인천공항 샌딩</span>
+      <div class="route k">자유 시간 (차량 미포함) → 호텔에서 짐 수령 → 인천국제공항 샌딩</div>
+      <div class="route e">Free time (vehicle not included) → collect luggage at hotel → transfer to Incheon International Airport</div>
+
+      <div class="pics wide">
+        <figure class="pic"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Myeongdong%20Crowd%20at%20Christmas,%20Seoul.jpg?width=1600" alt="Myeongdong"><figcaption>명동 · Myeongdong</figcaption></figure>
+      </div>
+
+      <p class="detail k">마지막 날은 고정 일정 없이 명동 쇼핑, 올리브영, 카페·브런치, 기념품 구매 등을 자유롭게 진행합니다. 약속된 시간에 호텔로 복귀하면 전용차가 인천국제공항까지 이동합니다.</p>
+      <p class="detail e">The last day has no fixed schedule — shopping in Myeongdong, Olive Young, cafes and brunch, or souvenirs. Guests return to the hotel at the agreed time and the private vehicle takes them to Incheon International Airport.</p>
+
+      <div class="cost"><table>
+        <tr><td><span class="k">서울 시내 → 인천국제공항 샌딩 (1차량)</span><span class="e">Central Seoul → Incheon International Airport (per vehicle)</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;110,000</span><span class="v sell">&#8361;137,500</span></button></td></tr>
+        <tr><td class="selfpay"><span class="k">낮 자유 시간 — 전세 차량 미포함</span><span class="e">Daytime free period — charter not included</span></td>
+          <td class="selfpay"><span class="k">별도</span><span class="e">excl.</span></td></tr>
+        <tr class="sum"><td><span class="k">DAY 6 합계</span><span class="e">Day 6 total</span></td>
+          <td><button class="amt" type="button"><span class="v net">&#8361;110,000</span><span class="v sell">&#8361;137,500</span><span class="tagmode"></span></button></td></tr>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <p class="kicker"><span class="k">요금</span><span class="e">PRICING</span></p>
+  <h2 class="k">4인 1차량 기준 총 요금</h2>
+  <h2 class="e">Total price — 4 adults, one vehicle</h2>
+  <span class="headsub k">Total price</span><span class="headsub e">4인 1차량 기준 총 요금</span>
+
+  <table class="ptable">
+    <thead><tr>
+      <th><span class="k">일자</span><span class="e">Day</span></th>
+      <th><span class="k">서비스 내용</span><span class="e">Service</span></th>
+      <th><span class="k">금액</span><span class="e">Amount</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td>DAY 1</td><td><span class="k">인천공항 픽업</span><span class="e">Incheon Airport pickup</span></td>
+        <td><button class="amt" type="button"><span class="v net">&#8361;110,000</span><span class="v sell">&#8361;137,500</span></button></td></tr>
+      <tr><td>DAY 2</td><td><span class="k">서울 클래식 일일 투어 + 입장·체험<small>경복궁 · 한복 · 남산 케이블카</small></span><span class="e">Seoul classics day tour + admissions<small>Gyeongbokgung · hanbok · Namsan cable car</small></span></td>
+        <td><button class="amt" type="button"><span class="v net">&#8361;412,000</span><span class="v sell">&#8361;515,000</span></button></td></tr>
+      <tr><td>DAY 3</td><td><span class="k">남이섬·춘천 일일 투어 + 입장·체험<small>레일바이크 · 남이섬 · 쁘띠프랑스 · 이탈리아마을</small></span><span class="e">Nami Island &amp; Chuncheon day tour + admissions<small>rail bike · Nami Island · Petite France · Italian Village</small></span></td>
+        <td><button class="amt" type="button"><span class="v net">&#8361;528,000</span><span class="v sell">&#8361;660,000</span></button></td></tr>
+      <tr><td>DAY 4</td><td><span class="k">강남 + K-Beauty 상담</span><span class="e">Gangnam + K-Beauty consultation</span></td>
+        <td><button class="amt" type="button"><span class="v net">&#8361;260,000</span><span class="v sell">&#8361;325,000</span></button></td></tr>
+      <tr><td>DAY 5</td><td><span class="k">K-Beauty Day</span><span class="e">K-Beauty Day</span></td>
+        <td><button class="amt" type="button"><span class="v net">&#8361;260,000</span><span class="v sell">&#8361;325,000</span></button></td></tr>
+      <tr><td>DAY 6</td><td><span class="k">인천공항 샌딩</span><span class="e">Incheon Airport drop-off</span></td>
+        <td><button class="amt" type="button"><span class="v net">&#8361;110,000</span><span class="v sell">&#8361;137,500</span></button></td></tr>
+      <tr><td colspan="2"><span class="k">차량 서비스 합계</span><span class="e">Vehicle services subtotal</span></td>
+        <td><button class="amt" type="button"><span class="v net">&#8361;1,300,000</span><span class="v sell">&#8361;1,625,000</span></button></td></tr>
+      <tr><td colspan="2"><span class="k">입장·체험 합계 (4인)</span><span class="e">Admissions &amp; activities subtotal (4 pax)</span></td>
+        <td><button class="amt" type="button"><span class="v net">&#8361;380,000</span><span class="v sell">&#8361;475,000</span></button></td></tr>
+      <tr class="total"><td colspan="2"><span class="k">총 요금 · 4인</span><span class="e">Total · 4 pax</span></td>
+        <td><button class="amt" type="button"><span class="v net">&#8361;1,680,000</span><span class="v sell">&#8361;2,100,000</span><span class="tagmode"></span></button></td></tr>
+    </tbody>
+  </table>
+
+  <div class="pp">
+    <div>
+      <div class="lab"><span class="k">1인 평균 (4인 기준)</span><span class="e">Per person (based on 4 pax)</span></div>
+      <div class="big"><button class="amt" type="button"><span class="v net">&#8361;420,000</span><span class="v sell">&#8361;525,000</span></button></div>
+      <div class="myr"><span class="k">참고 환산 · 판매가 기준 약 RM 1,630 (&#8361;1,000 ≈ RM 3.10, 실시간 환율로 재계산 필요)</span><span class="e">Indicative conversion at selling price: approx. RM 1,630 (&#8361;1,000 ≈ RM 3.10 — recalculate at the live rate)</span></div>
+    </div>
+    <div class="side">
+      <span class="k">NET는 여행사 정산가, SELL은 권장 소비자가입니다. 판매가는 NET 대비 25% 마크업 기준이며, 채널 수수료에 따라 조정할 수 있습니다.</span>
+      <span class="e">NET is the settlement rate to the agency; SELL is the recommended retail price. Selling prices apply a 25% markup on NET and can be adjusted for channel commission.</span>
+    </div>
+  </div>
+
+  <p style="font-size:13.5px;color:var(--ink-soft);margin-top:22px">
+    <span class="k">STARIA 1일 전세 기본 서비스 시간은 <strong>9시간</strong>이며, 초과 시 <strong>시간당 &#8361;30,000</strong>(NET)이 현장 추가됩니다. 인원이 4인을 초과하면 차량 등급과 요금이 변경되므로 재견적이 필요합니다.</span>
+    <span class="e">A standard STARIA day charter runs <strong>9 hours</strong>; overtime is charged on site at <strong>&#8361;30,000 per hour</strong> (NET). Groups larger than four require a different vehicle class and a fresh quotation.</span>
+  </p>
+</section>
+
+<section id="inclusion">
+  <p class="kicker"><span class="k">포함 사항</span><span class="e">INCLUSIONS</span></p>
+  <h2 class="k">무엇이 포함되고, 무엇이 별도인가</h2>
+  <h2 class="e">What is included, and what is not</h2>
+  <span class="headsub k">Included and excluded</span><span class="headsub e">포함 사항과 불포함 사항</span>
+
+  <div class="two">
+    <div>
+      <h3 class="yes k">포함 Included</h3><h3 class="yes e">Included</h3>
+      <ul class="yeslist k">
+        <li>STARIA 프라이빗 전용 차량</li><li>기사 서비스 (한국어 · 중국어)</li>
+        <li>유류비 · 주차비 · 통행료 전액</li><li>인천공항 픽업 및 샌딩</li>
+        <li>DAY 2 · 3 · 4 · 5 일일 전세 (각 9시간)</li><li>경복궁 입장권 (4인)</li>
+        <li>한복 체험 (4인)</li><li>남산 케이블카 왕복 (4인)</li>
+        <li>김유정 레일바이크 4인승 1대</li><li>남이섬 입장권 + 왕복 선박 (4인)</li>
+        <li>쁘띠프랑스 · 이탈리아마을 입장권 (4인)</li><li>뷰티 클리닉 이동 및 상담 연결</li>
+      </ul>
+      <ul class="yeslist e">
+        <li>Private STARIA vehicle throughout</li><li>Driver service (Korean and Mandarin)</li>
+        <li>Fuel, parking and tolls in full</li><li>Incheon Airport pickup and drop-off</li>
+        <li>Day charters on Days 2, 3, 4 and 5 (9 hours each)</li><li>Gyeongbokgung admission (4 pax)</li>
+        <li>Hanbok rental (4 pax)</li><li>Namsan cable car, return (4 pax)</li>
+        <li>Gimyujeong rail bike, one four-seater</li><li>Nami Island admission and return ferry (4 pax)</li>
+        <li>Petite France and Italian Village admission (4 pax)</li><li>Transport to the clinic and arranging the consultation</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="no k">불포함 Excluded</h3><h3 class="no e">Excluded</h3>
+      <ul class="nolist k">
+        <li>국제 왕복 항공권</li><li>5박 호텔 숙박</li>
+        <li>조식 · 중식 · 석식 전체</li>
+        <li>추천 식당 이용 요금 (삼계탕 · 닭갈비 · 무슬림 프렌들리 식당 등)</li>
+        <li>K-Beauty 실제 시술 비용</li><li>여행자 보험 및 의료 보험</li>
+        <li>개인 쇼핑 및 소비</li><li>일정에 명시되지 않은 입장권 · 체험</li>
+        <li>DAY 6 낮 자유 시간 전세 차량</li><li>9시간 초과 시 발생하는 추가 요금</li>
+        <li>영어 기사 · 영어 가이드 지정 시 추가 요금</li>
+      </ul>
+      <ul class="nolist e">
+        <li>International return airfare</li><li>Five nights' hotel accommodation</li>
+        <li>All breakfasts, lunches and dinners</li>
+        <li>Recommended restaurants (samgyetang, dakgalbi, Muslim-friendly venues and others)</li>
+        <li>Actual K-Beauty treatment fees</li><li>Travel and medical insurance</li>
+        <li>Personal shopping and incidentals</li><li>Any admission or activity not listed</li>
+        <li>Vehicle during the Day 6 free period</li><li>Overtime charges beyond 9 hours</li>
+        <li>Surcharge for an English-speaking driver or guide</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <h3 class="k">항공권 · 숙박은 이 상품에 포함되지 않습니다</h3>
+    <h3 class="e">Flights and accommodation are not part of this product</h3>
+    <p class="k">본 일정은 지상 차량 서비스와 입장·체험으로 구성되며, 국제 항공권과 5박 숙박은 제공하지 않습니다. 고객이 직접 예약하시거나, <strong>요청 시 항공·호텔을 포함한 별도 견적</strong>을 드립니다.</p>
+    <p class="e">This itinerary covers ground transport, admissions and activities. International airfare and the five nights' accommodation are not supplied. Guests may book these themselves, or <strong>we will prepare a separate quotation including flights and hotels on request</strong>.</p>
+    <p class="k"><strong>가이드 언어</strong> — 한국어 · 중국어 · 영어 대응이 가능합니다. 영어 기사 또는 영어 가이드를 지정하시는 경우 추가 요금이 발생하므로, 견적 요청 시 필요한 언어를 함께 알려주세요.</p>
+    <p class="e"><strong>Guide languages</strong> — Korean, Mandarin and English are available. Requesting an English-speaking driver or guide carries a surcharge, so please state the language you need when asking for a quotation.</p>
+  </div>
+</section>
+
+</main>
+
+<div class="appendix">
+  <div class="inner">
+    <p class="kicker"><span class="k">부록</span><span class="e">APPENDIX</span></p>
+    <h2 class="k">K-Beauty 프로그램 안내</h2>
+    <h2 class="e">How the K-Beauty component works</h2>
+    <span class="headsub k">Appendix</span><span class="headsub e">부록</span>
+
+    <p class="lead k" style="margin-bottom:8px">뷰티 파트는 <strong>상담(DAY 4)</strong>과 <strong>실행(DAY 5)</strong> 두 단계로 나뉩니다. 상품 요금에는 클리닉까지의 이동과 상담 연결이 포함되며, 실제 시술 비용은 포함되지 않습니다.</p>
+    <p class="lead e" style="margin-bottom:8px">The beauty element runs in two stages: <strong>consultation on Day 4</strong> and <strong>the programme itself on Day 5</strong>. The product price covers transport to the clinic and arranging the consultation; it does not cover the cost of any treatment.</p>
+
+    <div class="steps">
+      <div class="step"><b class="k">1. 사전 문진</b><b class="e">1. Pre-arrival questionnaire</b>
+        <p class="k">예약 확정 후 관심 분야, 알레르기, 복용 약, 과거 시술 이력을 양식으로 받습니다.</p>
+        <p class="e">After booking, guests complete a form covering interests, allergies, medication and past procedures.</p></div>
+      <div class="step"><b class="k">2. DAY 4 상담</b><b class="e">2. Day 4 consultation</b>
+        <p class="k">피부 상태를 확인하고 가능한 방향, 소요 시간, 회복 기간, 주의사항을 안내받습니다.</p>
+        <p class="e">Skin is assessed and the options, timings, recovery periods and precautions explained.</p></div>
+      <div class="step"><b class="k">3. 고객 결정</b><b class="e">3. The guest decides</b>
+        <p class="k">진행 여부와 항목은 전적으로 고객이 결정합니다. 상담만 받아도 상품 요금은 동일합니다.</p>
+        <p class="e">Whether to proceed, and with what, is entirely the guest's decision. The tour price is the same either way.</p></div>
+      <div class="step"><b class="k">4. DAY 5 진행</b><b class="e">4. Day 5 programme</b>
+        <p class="k">선택한 항목을 진행합니다. 종료 후 컨디션에 따라 휴식 또는 쇼핑으로 이어집니다.</p>
+        <p class="e">The chosen programme takes place, followed by rest or shopping depending on how guests feel.</p></div>
+    </div>
+
+    <div class="bridge">
+      <div class="bimg"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Essential%20natural%20oils%20and%20skin%20care%20products.jpg?width=1400" alt=""></div>
+      <div class="bin">
+        <div>
+          <h3 class="k">프로그램 30종 · 가격표 전체 보기</h3>
+          <h3 class="e">All 30 programmes, with prices</h3>
+          <p class="k">스킨·톤 케어 10종, 리프팅·윤곽 11종, 눈가·목 6종, 바디 3종. Dr.Petit 2026 가을 시즌 프로모션 가격을 그대로 정리했습니다.</p>
+          <p class="e">Ten skin and tone programmes, eleven lifting and contour, six eye and neck, three body — reproducing the Dr.Petit autumn 2026 season pricing.</p>
+        </div>
+        <button class="go" type="button" data-view="beauty"><span class="k">K-Beauty 프로그램 보기</span><span class="e">Open the K-Beauty list</span></button>
+      </div>
+    </div>
+
+    <p class="mini"><strong><span class="k">상담 가능 분야</span><span class="e">Consultation areas</span></strong></p>
+    <div class="chips k"><span>피부 관리</span><span>톤 · 브라이트닝</span><span>모공</span><span>탄력 · 윤곽</span><span>안티에이징 케어</span><span>홈케어 제품 상담</span></div>
+    <div class="chips e"><span>Skin care</span><span>Tone &amp; brightening</span><span>Pores</span><span>Firmness &amp; contour</span><span>Anti-ageing care</span><span>Home-care products</span></div>
+
+    <p class="mini"><strong><span class="k">말레이시아 고객 대응</span><span class="e">For Malaysian guests</span></strong></p>
+    <ul class="bullets k">
+      <li>여성 상담사 및 여성 시술자 배정 — 예약 시 요청하면 사전 조율합니다.</li>
+      <li>히잡 착용 상태 유지가 필요한 경우 개별 룸 배정을 요청할 수 있습니다.</li>
+      <li>한국어 · 중국어 · 영어 통역이 기본 제공되며, 말레이어는 사전 요청 시 별도 협의합니다.</li>
+      <li>회복 기간이 필요한 항목은 DAY 6 귀국 비행 일정을 고려해 상담 단계에서 확인해 주세요.</li>
+    </ul>
+    <ul class="bullets e">
+      <li>Female consultants and practitioners can be arranged if requested at booking.</li>
+      <li>A private room can be requested where the hijab needs to stay on.</li>
+      <li>Korean, Mandarin and English interpretation is standard; Malay on prior request.</li>
+      <li>For anything requiring recovery time, check against the Day 6 flight home at the consultation stage.</li>
+    </ul>
+
+    <p class="disclaimer k">본 부록은 상품 구성 설명을 위한 자료이며, 의료 광고나 시술 권유를 목적으로 하지 않습니다. 특정 시술의 효과·안전성에 대한 판단이나 보장을 제공하지 않으며, 실제 시술 가능 여부·항목·비용·부작용 및 주의사항은 의료기관의 전문 상담과 최종 설명을 기준으로 합니다. DAYDAYTOUR는 이동·통역·일정 조율 등 여행 서비스를 제공하며, 의료 행위의 주체가 아닙니다.</p>
+    <p class="disclaimer e">This appendix explains how the product is structured. It is not medical advertising and does not recommend any procedure. It offers no assessment or guarantee regarding the effect or safety of any treatment; eligibility, procedures, costs, side effects and precautions are governed by the clinic's professional consultation and final explanation. DAYDAYTOUR provides travel services and does not perform medical procedures.</p>
+  </div>
+</div>
+
+</div><!-- /view-tour -->
+
+<!-- =================================================================== -->
+<!-- ========================== K-BEAUTY =============================== -->
+<!-- =================================================================== -->
+<div id="view-beauty">
+
+<header class="bhero">
+  <div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+  <div class="bhero-in">
+    <div class="script">Dr.Petit × DAYDAYTOUR</div>
+    <h1 class="k">서울에서 보내는<br>하루, 가을 뷰티</h1>
+    <h1 class="e">One day in Seoul,<br>for yourself</h1>
+    <p class="tagline k">6일 5박 일정의 DAY 4 상담과 DAY 5 뷰티 데이에서 선택하는 프로그램입니다. 제휴 의료기관 Dr.Petit의 2026년 가을 시즌 가격을 그대로 담았습니다.</p>
+    <p class="tagline e">The programmes available at the Day 4 consultation and Day 5 Beauty Day of the 6D5N itinerary, at our partner clinic Dr.Petit's autumn 2026 season pricing.</p>
+    <span class="period"><span class="k">프로모션 2026. 09. 01 – 10. 31</span><span class="e">Promotion 1 Sep – 31 Oct 2026</span></span>
+
+    <div class="bstats">
+      <div><b>30</b><small class="k">프로그램</small><small class="e">Programmes</small></div>
+      <div><b>4</b><small class="k">카테고리</small><small class="e">Categories</small></div>
+      <div><b>25–50%</b><small class="k">시즌 할인</small><small class="e">Season discount</small></div>
+      <div><b>90–120<span style="font-size:16px">min</span></b><small class="k">상담 소요</small><small class="e">Consultation</small></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="bhow">
+  <p class="kicker"><span class="k">진행 방식</span><span class="e">HOW IT WORKS</span></p>
+  <h2 class="k">상담이 먼저, 결정은 고객이</h2>
+  <h2 class="e">Consultation first, the decision is yours</h2>
+  <span class="headsub k">How the programme runs</span><span class="headsub e">진행 방식</span>
+  <p class="lead k">아래 가격은 의료기관이 직접 청구하는 금액이며, DAYDAYTOUR 여행 상품 요금에는 포함되지 않습니다. 상담만 받고 진행하지 않아도 여행 요금에는 변동이 없습니다.</p>
+  <p class="lead e">The prices below are charged directly by the clinic and are not part of the DAYDAYTOUR tour price. Taking the consultation without proceeding does not change the tour price.</p>
+
+  <div class="bflow">
+    <div class="bcard"><span class="no">01</span>
+      <b class="k">사전 문진</b><b class="e">Before arrival</b>
+      <p class="k">예약 확정 후 관심 분야, 알레르기, 복용 약, 과거 시술 이력을 양식으로 받습니다.</p>
+      <p class="e">A form covering interests, allergies, medication and past procedures.</p></div>
+    <div class="bcard"><span class="no">02</span>
+      <b class="k">DAY 4 · 상담</b><b class="e">Day 4 · consultation</b>
+      <p class="k">피부 상태 확인 후 가능한 방향, 소요 시간, 회복 기간, 주의사항을 안내받습니다.</p>
+      <p class="e">Skin assessment, then options, timings, recovery periods and precautions.</p></div>
+    <div class="bcard"><span class="no">03</span>
+      <b class="k">DAY 5 · 진행</b><b class="e">Day 5 · programme</b>
+      <p class="k">선택한 항목을 진행합니다. 종료 후 컨디션에 따라 휴식·쇼핑을 이어갑니다.</p>
+      <p class="e">The chosen programme, followed by rest or shopping.</p></div>
+    <div class="bcard"><span class="no">04</span>
+      <b class="k">비용 정산</b><b class="e">Payment</b>
+      <p class="k">시술비는 의료기관에 현장에서 직접 결제합니다. 여행 요금과 별도입니다.</p>
+      <p class="e">Paid to the clinic on site, separately from the tour price.</p></div>
+  </div>
+
+  <div class="bgallery">
+    <figure class="bshot"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Essential%20natural%20oils%20and%20skin%20care%20products.jpg?width=1200" alt="Skincare products">
+      <figcaption><span class="k">상담 후 홈케어 제품까지 함께 안내</span><span class="e">Home-care advice follows the consultation</span></figcaption></figure>
+    <figure class="bshot tall"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Facial%20Cleansing%20toners.jpg?width=900" alt="Facial toners">
+      <figcaption><span class="k">피부 타입에 맞춘 루틴</span><span class="e">A routine matched to your skin</span></figcaption></figure>
+    <figure class="bshot tall"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Aqua+%20Skincare%20Products.jpg?width=900" alt="Skincare">
+      <figcaption><span class="k">올리브영 쇼핑까지 이어지는 하루</span><span class="e">The day carries on into shopping</span></figcaption></figure>
+  </div>
+</section>
+
+<section id="bmenu">
+  <p class="kicker"><span class="k">프로그램 가격표</span><span class="e">PROGRAMME LIST</span></p>
+  <h2 class="k">Dr.Petit 2026 가을 시즌 프로모션</h2>
+  <h2 class="e">Dr.Petit autumn 2026 season promotion</h2>
+  <span class="headsub k">4개 카테고리 · 30개 프로그램</span><span class="headsub e">Four categories · 30 programmes</span>
+
+  <!-- A -->
+  <div class="cat">
+    <div class="cathead">
+      <h3 class="k">스킨 · 톤 케어</h3><h3 class="e">Skin &amp; tone care</h3>
+      <span class="cn">秋日润养</span>
+      <span class="count"><span class="k">10개 프로그램</span><span class="e">10 programmes</span></span>
+    </div>
+    <table class="menu">
+      <tr><td class="item"><span class="k">IPL + 미백 관리 + 무통 리쥬란 백자침 Pro 2.5cc</span><span class="e">IPL + brightening care + painless Rejuran Pro 2.5cc</span></td>
+        <td class="price"><span class="was">500,000</span><span class="now">350,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">한국 여성 풀코스 체험 패키지<span class="memo">피코 미백 + 모공 관리 + LALA 필 + KiOMER Plus 의료용 드레싱 2cc + LDM</span></span><span class="e">Full experience package<span class="memo">Pico brightening + pore care + LALA peel + KiOMER Plus medical dressing 2cc + LDM</span></span></td>
+        <td class="price"><span class="was">720,000</span><span class="now">360,000</span><span class="off">50% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">피코 프락셀 레이저 + 무통 리쥬란 베이비 Pro 2.5cc + 진정 관리</span><span class="e">Pico fractional laser + painless Rejuran Baby Pro 2.5cc + soothing care</span></td>
+        <td class="price"><span class="was">560,000</span><span class="now">390,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">리쥬란 힐러(블랙) 2cc + 눈가 리쥬란(화이트/레드/블루) 1cc</span><span class="e">Rejuran Healer (black) 2cc + eye-area Rejuran (white / red / blue) 1cc</span></td>
+        <td class="price"><span class="was">600,000</span><span class="now">399,000</span><span class="off">33% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">Curejet + JUVELOOK (블루) 4cc<span class="memo">POTENZA 골드 마이크로니들로 변경 시 +150,000</span></span><span class="e">Curejet + JUVELOOK (blue) 4cc<span class="memo">Switching to POTENZA gold microneedling adds 150,000</span></span></td>
+        <td class="price"><span class="was">680,000</span><span class="now">475,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">엘라비에 Re2O 진피 콜라겐 스킨부스터 6cc</span><span class="e">Elravie Re2O dermal collagen booster 6cc</span></td>
+        <td class="price"><span class="was">880,000</span><span class="now">616,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">제오민(독일) 턱 보톡스 50u + 윤곽 주사 2cc</span><span class="e">Xeomin (Germany) jaw 50u + contour injection 2cc</span></td>
+        <td class="price"><span class="was">200,000</span><span class="now">140,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">제오민(독일) 전안면 스킨 보톡스 50u</span><span class="e">Xeomin (Germany) full-face skin botox 50u</span></td>
+        <td class="price"><span class="was">400,000</span><span class="now">280,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">제오민(독일) 서울 대(大)리프팅 100u</span><span class="e">Xeomin (Germany) full lifting programme 100u</span></td>
+        <td class="price"><span class="was">800,000</span><span class="now">560,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">레스틸렌 히알루론산 필러 2cc<span class="memo">코 기저부(鼻基底) 제외</span></span><span class="e">Restylane hyaluronic acid filler 2cc<span class="memo">Excludes the paranasal / nose-base area</span></span></td>
+        <td class="price"><span class="was">1,000,000</span><span class="now">700,000</span><span class="off">30% OFF</span></td></tr>
+    </table>
+  </div>
+
+  <!-- B -->
+  <div class="cat">
+    <div class="cathead">
+      <h3 class="k">리프팅 · 윤곽</h3><h3 class="e">Lifting &amp; contour</h3>
+      <span class="cn">紧致塑颜</span>
+      <span class="count"><span class="k">11개 프로그램</span><span class="e">11 programmes</span></span>
+    </div>
+    <table class="menu">
+      <tr><td class="item"><span class="k">슈링크 유니버스 2세대 300샷 + 리쥬란 힐러(블랙) 2cc</span><span class="e">Shurink Universe 2nd gen 300 shots + Rejuran Healer (black) 2cc</span></td>
+        <td class="price"><span class="was">700,000</span><span class="now">490,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">ONDA / 티타늄 리프팅 50kj</span><span class="e">ONDA / titanium lifting 50kj</span></td>
+        <td class="price"><span class="was">950,000</span><span class="now">650,000</span><span class="off">32% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">슈링크 유니버스 2세대 300샷 + ONDA 40kj</span><span class="e">Shurink Universe 2nd gen 300 shots + ONDA 40kj</span></td>
+        <td class="price"><span class="was">1,110,000</span><span class="now">770,000</span><span class="off">31% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">슈링크 유니버스 2세대 900샷 + 윤곽 주사 2부위</span><span class="e">Shurink Universe 2nd gen 900 shots + contour injection, 2 areas</span></td>
+        <td class="price"><span class="was">1,150,000</span><span class="now">799,000</span><span class="off">31% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">올리지오 X 300샷 + 슈링크 유니버스 2세대 600샷</span><span class="e">Oligio X 300 shots + Shurink Universe 2nd gen 600 shots</span></td>
+        <td class="price"><span class="was">1,450,000</span><span class="now">990,000</span><span class="off">32% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">올리지오 X 300샷 + ONDA 40kj</span><span class="e">Oligio X 300 shots + ONDA 40kj</span></td>
+        <td class="price"><span class="was">1,510,000</span><span class="now">1,050,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">XERF 300샷 + 스컬트라 3cc</span><span class="e">XERF 300 shots + Sculptra 3cc</span></td>
+        <td class="price"><span class="was">1,680,000</span><span class="now">1,190,000</span><span class="off">29% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">XERF 300샷 + 올리지오 X 300샷</span><span class="e">XERF 300 shots + Oligio X 300 shots</span></td>
+        <td class="price"><span class="was">2,100,000</span><span class="now">1,490,000</span><span class="off">29% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">울쎄라(미국) 2세대 300샷 + 윤곽 주사 2부위</span><span class="e">Ulthera (US) 2nd gen 300 shots + contour injection, 2 areas</span></td>
+        <td class="price"><span class="was">1,900,000</span><span class="now">1,390,000</span><span class="off">27% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">써마지 FLX(미국) 300샷 + LDM</span><span class="e">Thermage FLX (US) 300 shots + LDM</span></td>
+        <td class="price"><span class="was">1,980,000</span><span class="now">1,390,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">소프웨이브 100샷 + XERF 300샷</span><span class="e">Sofwave 100 shots + XERF 300 shots</span></td>
+        <td class="price"><span class="was">2,830,000</span><span class="now">1,990,000</span><span class="off">30% OFF</span></td></tr>
+    </table>
+  </div>
+
+  <!-- C -->
+  <div class="cat">
+    <div class="cathead">
+      <h3 class="k">눈가 · 목</h3><h3 class="e">Eye &amp; neck</h3>
+      <span class="cn">眼颈焕柔</span>
+      <span class="count"><span class="k">6개 프로그램</span><span class="e">6 programmes</span></span>
+    </div>
+    <span class="subhead"><span class="k">눈가 · 眼部</span><span class="e">Eye area · 眼部</span></span>
+    <table class="menu">
+      <tr><td class="item"><span class="k">눈가 리쥬란(화이트) 1cc + 보톡스 눈가 주름</span><span class="e">Eye-area Rejuran (white) 1cc + Botox for crow's feet</span></td>
+        <td class="price"><span class="was">350,000</span><span class="now">245,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">JUVELOOK 눈가 전용(그린) 2cc + 눈가 리쥬란(화이트) 1cc</span><span class="e">JUVELOOK eye formulation (green) 2cc + eye-area Rejuran (white) 1cc</span></td>
+        <td class="price"><span class="was">550,000</span><span class="now">385,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">올리지오 X 눈가 200샷 + 눈가 리쥬란(화이트) 1cc<span class="memo">써마지 FLX(미국) 눈가 225샷으로 변경 시 +650,000</span></span><span class="e">Oligio X eye area 200 shots + eye-area Rejuran (white) 1cc<span class="memo">Switching to Thermage FLX (US) eye 225 shots adds 650,000</span></span></td>
+        <td class="price"><span class="was">850,000</span><span class="now">595,000</span><span class="off">30% OFF</span></td></tr>
+    </table>
+    <span class="subhead"><span class="k">목 · 颈部</span><span class="e">Neck · 颈部</span></span>
+    <table class="menu">
+      <tr><td class="item"><span class="k">목주름 1줄 필러 — SKINVIVE / REVIVE 장기 지속형 2cc</span><span class="e">Single neck-line filler — SKINVIVE / REVIVE long-lasting 2cc</span></td>
+        <td class="price"><span class="was">850,000</span><span class="now">599,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">엘라비에 Re2O 진피 콜라겐 스킨부스터 6cc</span><span class="e">Elravie Re2O dermal collagen booster 6cc</span></td>
+        <td class="price"><span class="was">880,000</span><span class="now">660,000</span><span class="off">25% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">올리지오 X 300샷 + 보톡스 목 리프팅<span class="memo">써마지 FLX(미국) 300샷으로 변경 시 +750,000</span></span><span class="e">Oligio X 300 shots + Botox neck lifting<span class="memo">Switching to Thermage FLX (US) 300 shots adds 750,000</span></span></td>
+        <td class="price"><span class="was">1,150,000</span><span class="now">799,000</span><span class="off">31% OFF</span></td></tr>
+    </table>
+  </div>
+
+  <!-- D -->
+  <div class="cat">
+    <div class="cathead">
+      <h3 class="k">바디</h3><h3 class="e">Body</h3>
+      <span class="cn">秋日纤体</span>
+      <span class="count"><span class="k">3개 프로그램</span><span class="e">3 programmes</span></span>
+    </div>
+    <table class="menu">
+      <tr><td class="item"><span class="k">바디 V-OLET 지방 분해 주사 · 2cc 당</span><span class="e">Body V-OLET lipolysis injection, per 2cc</span></td>
+        <td class="price"><span class="was">350,000</span><span class="now">245,000</span><span class="off">30% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">울핏(Ulifit) 단일 부위 1,000샷</span><span class="e">Ulifit, single area, 1,000 shots</span></td>
+        <td class="price"><span class="was">690,000</span><span class="now">499,000</span><span class="off">28% OFF</span></td></tr>
+      <tr><td class="item"><span class="k">ONDA 바디 단일 부위 + 바디 윤곽 주사 6회<span class="memo">1:1 맞춤 시술 · 에너지 값 제한 없음 / 적용 부위 — 팔 · 복부 · 허리 · 힙 · 허벅지</span></span><span class="e">ONDA body, single area + body contour injections ×6<span class="memo">One-to-one customised treatment, no energy cap / areas — arms, abdomen, waist, hips, thighs</span></span></td>
+        <td class="price"><span class="was">1,700,000</span><span class="now">990,000</span><span class="off">42% OFF</span></td></tr>
+    </table>
+  </div>
+
+  <div class="taxnote">
+    <span class="k"><strong>표시 가격은 부가세 10% 별도</strong>이며 원화(KRW) 기준입니다. 프로모션 기간은 2026년 9월 1일부터 10월 31일까지이며, 기간 종료 후에는 정상가가 적용됩니다. 예약 시점과 시술일이 다를 경우 시술일 기준 가격이 적용됩니다.</span>
+    <span class="e"><strong>Prices exclude 10% surtax</strong> and are quoted in Korean won. The promotion runs 1 September – 31 October 2026; standard rates apply afterwards. Where booking and treatment dates differ, the price on the treatment date applies.</span>
+  </div>
+</section>
+
+<section id="bcare">
+  <p class="kicker"><span class="k">말레이시아 고객 대응</span><span class="e">FOR MALAYSIAN GUESTS</span></p>
+  <h2 class="k">사전에 요청하면 준비해 드립니다</h2>
+  <h2 class="e">Arranged in advance on request</h2>
+  <span class="headsub k">What we prepare before arrival</span><span class="headsub e">사전 준비 사항</span>
+
+  <div class="care">
+    <div><b class="k">여성 상담사 · 여성 시술자</b><b class="e">Female consultant and practitioner</b>
+      <p class="k">예약 시 요청하면 클리닉과 사전 조율합니다.</p>
+      <p class="e">Requested at booking and arranged with the clinic in advance.</p></div>
+    <div><b class="k">개별 룸 배정</b><b class="e">Private room</b>
+      <p class="k">히잡 착용 상태를 유지해야 하는 경우 요청할 수 있습니다.</p>
+      <p class="e">Available where the hijab needs to stay on throughout.</p></div>
+    <div><b class="k">통역</b><b class="e">Interpretation</b>
+      <p class="k">한국어 · 중국어 · 영어가 기본 제공됩니다. 말레이어는 사전 요청 시 별도 협의합니다.</p>
+      <p class="e">Korean, Mandarin and English are standard. Malay on prior request.</p></div>
+    <div><b class="k">회복 기간과 귀국 일정</b><b class="e">Recovery and your flight home</b>
+      <p class="k">DAY 6 비행 일정을 고려해 상담 단계에서 회복 기간을 확인해 주세요.</p>
+      <p class="e">Check recovery times at the consultation stage against the Day 6 departure.</p></div>
+  </div>
+
+  <div class="backcta">
+    <div>
+      <h3 class="k">이 프로그램은 6일 5박 일정에 포함되어 있습니다</h3>
+      <h3 class="e">This programme sits inside the 6D5N itinerary</h3>
+      <p class="k">DAY 4 상담과 DAY 5 뷰티 데이가 일정에 이미 배정되어 있으며, 클리닉까지의 이동과 통역 연결은 여행 요금에 포함됩니다.</p>
+      <p class="e">Day 4 consultation and Day 5 Beauty Day are already built into the itinerary. Transport to the clinic and interpretation are covered by the tour price.</p>
+    </div>
+    <button type="button" data-view="tour"><span class="k">상품소개서로 돌아가기</span><span class="e">Back to the brochure</span></button>
+  </div>
+
+  <p class="disclaimer k">본 페이지는 제휴 의료기관이 제공한 시즌 가격 자료를 여행 상품 안내 목적으로 정리한 것이며, 의료 광고나 특정 시술의 권유를 목적으로 하지 않습니다. 시술의 효과·안전성에 대한 판단이나 보장을 제공하지 않으며, 실제 시술 가능 여부, 항목, 최종 비용, 부작용 및 주의사항은 의료기관의 전문 상담과 최종 설명을 기준으로 합니다. 모든 시술에는 개인차와 부작용의 가능성이 있습니다. DAYDAYTOUR는 이동·통역·일정 조율 등 여행 서비스를 제공하며 의료 행위의 주체가 아닙니다. 시술 진행 여부는 고객 본인의 판단과 책임하에 결정됩니다. 가격 및 구성은 의료기관 사정에 따라 사전 고지 없이 변경될 수 있습니다.</p>
+  <p class="disclaimer e">This page organises season pricing supplied by our partner clinic for the purpose of explaining the tour product. It is not medical advertising and does not recommend any procedure. It offers no assessment or guarantee of the effect or safety of any treatment; eligibility, procedures, final cost, side effects and precautions are governed by the clinic's professional consultation and final explanation. All procedures carry individual variation and the possibility of side effects. DAYDAYTOUR provides travel services and does not perform medical procedures. Any decision to proceed rests with the guest. Prices and contents may change without notice at the clinic's discretion.</p>
+</section>
+
+</main>
+</div><!-- /view-beauty -->
+
+<footer>
+  <div class="foot-in">
+    <div>
+      <div class="logo">DAY<span style="color:#7fb3a3">DAY</span>TOUR</div>
+      <p class="k">Seoul K-Beauty 6D5N · 상품코드 DDT-SEL-KB6<br>
+        B2B 판매용 자료 — 여행사 배포용<br>
+        <span style="opacity:.75">문의 및 예약: 영업 담당자에게 연락 바랍니다.</span></p>
+      <p class="e">Seoul K-Beauty 6D5N · product code DDT-SEL-KB6<br>
+        B2B sales material — for distribution to travel agencies<br>
+        <span style="opacity:.75">Enquiries and bookings: please contact your sales representative.</span></p>
+    </div>
+    <div class="r">
+      <span class="k">여행 요금은 4인 1차량 기준이며 사전 고지 없이 변경될 수 있습니다.<br>시술 가격 출처 · 제휴 의료기관 Dr.Petit 제공 자료 (부가세 10% 별도)<br>사진 · Wikimedia Commons (CC BY / CC BY-SA / CC0)</span>
+      <span class="e">Tour prices are for 4 adults in one vehicle and may change without notice.<br>Treatment pricing · supplied by Dr.Petit (excludes 10% surtax)<br>Photography · Wikimedia Commons (CC BY / CC BY-SA / CC0)</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var body = document.body, html = document.documentElement;
+
+  function setLang(l){
+    body.classList.remove('lang-ko','lang-en');
+    body.classList.add('lang-' + l);
+    html.setAttribute('lang', l);
+  }
+  function setMode(m){
+    body.classList.remove('mode-net','mode-sell');
+    body.classList.add('mode-' + m);
+  }
+  function setView(v){
+    body.classList.remove('view-tour','view-beauty');
+    body.classList.add('view-' + v);
+    window.scrollTo({top:0, behavior:'auto'});
+    document.title = (v === 'beauty')
+      ? 'DAYDAYTOUR · K-Beauty Programme'
+      : 'DAYDAYTOUR · Seoul K-Beauty 6D5N';
+  }
+
+  document.querySelectorAll('.switch.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.dataset.lang); });
+  });
+  document.querySelectorAll('.switch.price button').forEach(function(b){
+    b.addEventListener('click', function(){ setMode(b.dataset.mode); });
+  });
+  document.querySelectorAll('[data-view]').forEach(function(b){
+    b.addEventListener('click', function(){ setView(b.dataset.view); });
+  });
+  document.querySelectorAll('.amt').forEach(function(a){
+    a.addEventListener('click', function(){
+      setMode(body.classList.contains('mode-net') ? 'sell' : 'net');
+    });
+  });
+  document.querySelectorAll('img').forEach(function(img){
+    img.addEventListener('error', function(){ img.style.display = 'none'; });
+  });
+})();
+</script>
+</body>
+</html>

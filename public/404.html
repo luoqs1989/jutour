@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <title>JUTour</title>
+    <script>
+      // GitHub Pages has no server-side rewrites, so a hard refresh on a deep
+      // route (e.g. /jutour/zh/products/abc) 404s. This stashes the intended
+      // URL in sessionStorage and bounces to the SPA's index.html, which
+      // restores it before the router mounts (see index.html's inline script).
+      sessionStorage.redirect = location.href;
+      location.replace('/jutour/');
+    </script>
+  </head>
+  <body></body>
+</html>
